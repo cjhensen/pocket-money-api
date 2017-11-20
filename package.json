@@ -4,7 +4,7 @@
   "description": "PocketMoney API",
   "main": "index.js",
   "scripts": {
-    "start": "node ./server/server.js",
+    "start": "node ./src/server.js",
     "test": "mocha ./test"
   },
   "author": "Christian Hensen",
@@ -12,7 +12,9 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "mongoose": "^4.13.4",
