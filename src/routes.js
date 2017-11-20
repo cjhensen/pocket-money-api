@@ -3,11 +3,11 @@ module.exports = function(app, passport, express, pathVar) {
 
   // app.use(express.static('public/'));
 
-  app.get('/api/*', function(request, response) {
-    console.log('new router works');
-    response.json({ok: true});
-    // response.sendFile('index.html', { root: ''})
-  });
+  // app.get('/api/*', function(request, response) {
+  //   console.log('new router works');
+  //   response.json({ok: true});
+  //   // response.sendFile('index.html', { root: ''})
+  // });
 
   app.post('/api/signup',
     passport.authenticate('local-signup', {
@@ -22,9 +22,9 @@ module.exports = function(app, passport, express, pathVar) {
     response.send(200);
   });
 
-  app.get('/api/signup/error', function(request, response) {
+  app.get('/api/signup/failure', function(request, response) {
     console.log('signup failure');
-    response.send(400);
+    response.send(401);
   });
 
   app.post('/api/login',
@@ -42,7 +42,7 @@ module.exports = function(app, passport, express, pathVar) {
 
   app.get('/api/login/failure', function(request, response) {
     console.log('login failure');
-    response.send(400);
+    response.send(401);
   });
 
   function isLoggedIn(request, response, next) {
