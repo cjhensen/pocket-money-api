@@ -45,6 +45,68 @@ module.exports = function(app, passport, express, pathVar) {
     response.send(401);
   });
 
+
+  // Initialize user data
+  app.get('/api/userdata', isLoggedIn, function(request, response) {
+    console.log('GET userdata');
+  });
+
+  // Transactions
+  app.get('/api/transaction', isLoggedIn, function(request, response) {
+    console.log('GET transaction');
+  });
+
+  app.put('/api/transaction', isLoggedIn, function(request, response) {
+    console.log('PUT transaction');
+    console.log(request.body);
+
+    const updateItem = request.body;
+
+    User
+      .findOneAndUpdate({_id: request.user._id}, {$push: {'userData.transactions': updateItem}})
+      .exec()
+      .then(user => response.status(204).end())
+      .catch(error => response.status(500).json({message: 'Internal server error'}));
+  });
+
+  // Income
+  app.get('/api/income', isLoggedIn, function(request, response) {
+    console.log('GET income');
+  });
+
+  app.put('/api/income', isLoggedIn, function(request, response) {
+    console.log('PUT income');
+
+    console.log(request.body);
+
+    const updateItem = request.body;
+
+    User
+      .findOneAndUpdate({_id: request.user._id}, {$push: {'userData.income': updateItem}})
+      .exec()
+      .then(user => response.status(204).end())
+      .catch(error => response.status(500).json({message: 'Internal server error'}));
+  });
+
+  // Categories
+  app.get('/api/category', isLoggedIn, function(request, response) {
+    console.log('GET category');
+  });
+
+  app.put('/api/category', isLoggedIn, function(request, response) {
+    console.log('PUT category');
+
+    console.log(request.body);
+
+    const updateItem = request.body;
+
+    User
+      .findOneAndUpdate({_id: request.user._id}, {$push: {'userData.categories': updateItem}})
+      .exec()
+      .then(user => response.status(204).end())
+      .catch(error => response.status(500).json({message: 'Internal server error'}));
+  });
+
   function isLoggedIn(request, response, next) {
     if(request.isAuthenticated()) {
       console.log('user is authenticated');
