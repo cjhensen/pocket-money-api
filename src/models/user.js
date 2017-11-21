@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
     categories: [{
       categoryName: String,
       totalBudget: Number,
+      id: String,
       _id: false
     }],
     transactions: [{
@@ -17,12 +18,14 @@ const userSchema = mongoose.Schema({
       category: String,
       moneySpent: Number,
       transactionRecurring: Boolean,
+      id: String,
       _id: false
     }],
     income: [{
       incomeName: String,
       incomeAmount: Number,
       incomeRecurring: Boolean,
+      id: String,
       _id: false
     }]
   }
@@ -32,9 +35,11 @@ userSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     username: this.userInfo.username,
-    categories: this.userData.categories,
-    transactions: this.userData.transactions,
-    income: this.userData.income
+    userData: {
+      categories: this.userData.categories,
+      transactions: this.userData.transactions,
+      income: this.userData.income
+    }
   }
 }
 

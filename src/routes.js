@@ -49,13 +49,18 @@ module.exports = function(app, passport, express, pathVar) {
   // Initialize user data
   app.get('/api/userdata', isLoggedIn, function(request, response) {
     console.log('GET userdata');
+
+    User
+      .findById(request.user._id)
+      .exec()
+      .then(user => response.json(user.apiRepr()))
+      .catch(error => {
+        console.error(error);
+        response.status(500).json({ message: 'Internal server error'})
+      });
   });
 
   // Transactions
-  app.get('/api/transaction', isLoggedIn, function(request, response) {
-    console.log('GET transaction');
-  });
-
   app.put('/api/transaction', isLoggedIn, function(request, response) {
     console.log('PUT transaction');
     console.log(request.body);
@@ -69,11 +74,22 @@ module.exports = function(app, passport, express, pathVar) {
       .catch(error => response.status(500).json({message: 'Internal server error'}));
   });
 
-  // Income
-  app.get('/api/income', isLoggedIn, function(request, response) {
-    console.log('GET income');
+  app.delete('/api/transaction/:id', isLoggedIn, function(request, response) {
+    console.log('DELETE transaction');
+
+    const itemToDel = request.params.id;
+    console.log('request.params.id', request.params.id);
+
+    User
+      .findOneAndUpdate(
+        {_id: request.user._id},
+        {$pull: {'userData.transactions': {id: itemToDel}}})
+      .exec()
+      .then(user => response.status(204).end())
+      .catch(error => response.status(500).json({message: 'Internal server error'}));
   });
 
+  // Income
   app.put('/api/income', isLoggedIn, function(request, response) {
     console.log('PUT income');
 
@@ -88,11 +104,22 @@ module.exports = function(app, passport, express, pathVar) {
       .catch(error => response.status(500).json({message: 'Internal server error'}));
   });
 
-  // Categories
-  app.get('/api/category', isLoggedIn, function(request, response) {
-    console.log('GET category');
+  app.delete('/api/income/:id', isLoggedIn, function(request, response) {
+    console.log('DELETE income');
+
+    const itemToDel = request.params.id;
+    console.log('request.params.id', request.params.id);
+
+    User
+      .findOneAndUpdate(
+        {_id: request.user._id},
+        {$pull: {'userData.income': {id: itemToDel}}})
+      .exec()
+      .then(user => response.status(204).end())
+      .catch(error => response.status(500).json({message: 'Internal server error'}));
   });
 
+  // Categories
   app.put('/api/category', isLoggedIn, function(request, response) {
     console.log('PUT category');
 
@@ -102,6 +129,21 @@ module.exports = function(app, passport, express, pathVar) {
 
     User
       .findOneAndUpdate({_id: request.user._id}, {$push: {'userData.categories': updateItem}})
+      .exec()
+      .then(user => response.status(204).end())
+      .catch(error => response.status(500).json({message: 'Internal server error'}));
+  });
+
+  app.delete('/api/category/:id', isLoggedIn, function(request, response) {
+    console.log('DELETE category');
+
+    const itemToDel = request.params.id;
+    console.log('request.params.id', request.params.id);
+
+    User
+      .findOneAndUpdate(
+        {_id: request.user._id},
+        {$pull: {'userData.categories': {id: itemToDel}}})
       .exec()
       .then(user => response.status(204).end())
       .catch(error => response.status(500).json({message: 'Internal server error'}));
