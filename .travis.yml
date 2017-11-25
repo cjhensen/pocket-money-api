@@ -1,0 +1,11 @@
+language: node_js
+node_js: node
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: QDx6l4D1BPHYQSzKJM5sKyBjXRKbA/3h49nBKf9/FiaotDf9n9LiiCSiIyae72tllEnX6GjYIJKxhQLxrqjtLEkI4zwWt2yCAP2/6VmnMdPwQoEJtuI5GKyoBZq7+UYJjALZlKwYt0/7AS3/VV2AMJUXnQlFytHxFnGHD8XxEn8MUgjpv3MXIxiCC2hPYnupHL5Ys5PK4aCJaDUBwqSXE5hQBwiKNUY1+S3SfHABGHid4+X0WQl5Xv2VeZeJ5B4peKTwZYq946mYBRan5Vh/H2HNGTkDW0u7bHFy+H4yQM8Y8qSHr8pWNW9F4pDVQGlQNhVCNo35kukY+BCSMfzJdFsbXd0MJ8YJeVItFxFm4PUX8Gwbs696tlddF/doJ9M+V5g+RBK3e4GVtWT5sHO7dWoJeCdKqP8Uyj+mJAWcq1vgB0WooRlu+eFMEOjlGykcGz/FKNm/nKkQ13WEXsAQI/VLSKNA9hFgBakQICAxAFvlHQAHLe7YtGT/7/HoF+1Gj1Kja6cfQUgifZdsSnbYq9hcRtyMKKT8dT3dntDNr0e5X5VeCT6LqaaMhAT1kZcdKSH9ag498LFvxJMc3tOQ4Tm+Vajdtz9e+C9LQl9fBgEIGMJujI4x0qQIo1C3jiKXPGkg2USa5/5E7D/BcR/hdO5yRrp38v2gFpICa9GX6ic=
+  app: pocket-money-api
+  on:
+    repo: cjhensen/pocket-money-api
