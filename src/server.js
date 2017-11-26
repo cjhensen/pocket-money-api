@@ -32,7 +32,7 @@ app.use(passport.session());
 app.use(flash());
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:8080'],
+  origin: ['http://localhost:3000', 'http://localhost:8080', 'https://pocketmoney.netlify.com/'],
   optionsSuccessStatus: 200,
   credentials: true
 };
