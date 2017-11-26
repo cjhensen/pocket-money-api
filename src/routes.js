@@ -9,6 +9,10 @@ module.exports = function(app, passport, express, pathVar) {
   //   // response.sendFile('index.html', { root: ''})
   // });
 
+  app.get('/api/', function(request, response) {
+    response.send(200);
+  });
+
   app.post('/api/signup',
     passport.authenticate('local-signup', {
       successRedirect: '/api/signup/success',
@@ -44,6 +48,16 @@ module.exports = function(app, passport, express, pathVar) {
     console.log('login failure');
     response.send(401);
   });
+
+  function isLoggedIn(request, response, next) {
+    if(request.isAuthenticated()) {
+      console.log('user is authenticated');
+      next();
+    } else {
+      console.log('not authenticated');
+      response.redirect('/api/login/failure');
+    }
+  }
 
 
   // Initialize user data
@@ -148,15 +162,5 @@ module.exports = function(app, passport, express, pathVar) {
       .then(user => response.status(204).end())
       .catch(error => response.status(500).json({message: 'Internal server error'}));
   });
-
-  function isLoggedIn(request, response, next) {
-    if(request.isAuthenticated()) {
-      console.log('user is authenticated');
-      next();
-    } else {
-      console.log('not authenticated');
-      response.redirect('/');
-    }
-  }
 
 }
