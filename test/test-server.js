@@ -104,7 +104,6 @@ describe('Pocket Money API', function() {
   const username = 'adminTest';
   const password = 'adminTestPw';
   const pwd = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-
   before(function(done) {
     // runServer(TEST_DATABASE_URL)
     //   .then(() => {
@@ -153,17 +152,26 @@ describe('Pocket Money API', function() {
     runServer(TEST_DATABASE_URL)
       .then(seedUserData()
         .then(function() {
-          // done();
+          done();
         }));
-      done();
+    //   done();
+
+      // return runServer(TEST_DATABASE_URL)
+      //   .then(() => seedUserData());
+
+      // return runServer(TEST_DATABASE_URL);
   });
 
   after(function(done) {
     // return closeServer();
+    // return tearDownDb()
+    // .then(() => closeServer());
+
     tearDownDb()
     .then(closeServer()
       .then(function() {
         done();
+        process.exit(0);
       }));
   });
 
@@ -211,6 +219,7 @@ describe('Pocket Money API', function() {
     //   }
     // };
     // User.insertMany(testUser);
+    // return seedUserData();
   });
 
   afterEach(function() {
@@ -226,7 +235,6 @@ describe('Pocket Money API', function() {
         .then(function(response) {
           response.should.have.status(200);
         });
-        done();
     });
   });
 
@@ -407,7 +415,7 @@ describe('Pocket Money API', function() {
 
     });
 
-    xdescribe('/api/transaction', function() {
+    describe('/api/transaction', function() {
       it('PUT should add a new transaction to the userdata', function(done) {
         const objToInsert = {
           "category" : "test",
@@ -425,7 +433,7 @@ describe('Pocket Money API', function() {
           });
       });
 
-      it('DELETE should delete a transaction from the userdata', function(done) {
+      xit('DELETE should delete a transaction from the userdata', function(done) {
         const idToDelete = '8hl90';
 
         authenticatedUser
@@ -444,6 +452,7 @@ describe('Pocket Money API', function() {
 
 
 });
+
 
 
 

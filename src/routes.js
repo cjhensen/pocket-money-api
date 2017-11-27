@@ -13,6 +13,11 @@ module.exports = function(app, passport, express, pathVar) {
     response.send(200);
   });
 
+  app.get('/api/logout', function(request, response) {
+    request.logout();
+    response.send(200);
+  });
+
   app.post('/api/signup',
     passport.authenticate('local-signup', {
       successRedirect: '/api/signup/success',
