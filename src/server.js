@@ -36,7 +36,9 @@ const corsOptions = {
   'http://localhost:3000', 
   'http://localhost:8080', 
   'https://pocketmoney.netlify.com', 
-  'https://pocketmoney.netlify.com/'
+  'https://pocketmoney.netlify.com/',
+  'pocketmoney.netlify.com',
+  'pocketmoney.netlify.com/'
   ],
   optionsSuccessStatus: 200,
   credentials: true
