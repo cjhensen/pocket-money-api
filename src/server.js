@@ -41,7 +41,8 @@ const corsOptions = {
   'pocketmoney.netlify.com/'
   ],
   optionsSuccessStatus: 200,
-  credentials: true
+  credentials: true,
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
 };
 
 app.use(cors(corsOptions));
