@@ -56,6 +56,7 @@ module.exports = function(app, passport, express, pathVar) {
   app.post('/api/login', passport.authenticate('local-login'),
     function(request, response) {
       if(request.user) {
+        console.log('new login working');
         response.send(200);
       } else {
         response.send(401);
