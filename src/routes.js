@@ -28,7 +28,7 @@ module.exports = function(app, passport, express, pathVar) {
 
   app.post('/api/signup', passport.authenticate('local-signup'),
     function(request, response) {
-      if(request.user) {
+      if(request.isAuthenticated()) {
         response.send(200);
       } else {
         response.send(401);
@@ -55,7 +55,7 @@ module.exports = function(app, passport, express, pathVar) {
 
   app.post('/api/login', passport.authenticate('local-login'),
     function(request, response) {
-      if(isLoggedIn(request, response)) {
+      if(request.isAuthenticated()) {
         console.log('new login working');
         response.send(200);
       } else {
