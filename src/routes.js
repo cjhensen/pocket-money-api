@@ -18,13 +18,22 @@ module.exports = function(app, passport, express, pathVar) {
     response.send(200);
   });
 
-  app.post('/api/signup',
-    passport.authenticate('local-signup', {
-      successRedirect: '/api/signup/success',
-      failureRedirect: '/api/signup/failure',
-      failureFlash: true
-    })
-  );
+  // app.post('/api/signup',
+  //   passport.authenticate('local-signup', {
+  //     successRedirect: '/api/signup/success',
+  //     failureRedirect: '/api/signup/failure',
+  //     failureFlash: true
+  //   })
+  // );
+
+  app.post('/api/signup', passport.authenticate('local-signup'),
+    function(request, response) {
+      if(request.user) {
+        response.send(200);
+      } else {
+        response.send(401);
+      }
+    });
 
   app.get('/api/signup/success', isLoggedIn, function(request, response) {
     console.log('signup success');
@@ -36,13 +45,22 @@ module.exports = function(app, passport, express, pathVar) {
     response.send(401);
   });
 
-  app.post('/api/login',
-    passport.authenticate('local-login', {
-      successRedirect: '/api/login/success',
-      failureRedirect: '/api/login/failure',
-      failureFlash: true
-    })
-  );
+  // app.post('/api/login',
+  //   passport.authenticate('local-login', {
+  //     successRedirect: '/api/login/success',
+  //     failureRedirect: '/api/login/failure',
+  //     failureFlash: true
+  //   })
+  // );
+
+  app.post('/api/login', passport.authenticate('local-login'),
+    function(request, response) {
+      if(request.user) {
+        response.send(200);
+      } else {
+        response.send(401);
+      }
+    });
 
   app.get('/api/login/success', isLoggedIn, function(request, response) {
     console.log('login success');
