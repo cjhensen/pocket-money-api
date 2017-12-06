@@ -79,7 +79,7 @@ module.exports = function(app, passport, express, pathVar) {
       next();
     } else {
       console.log('not authenticated');
-      response.redirect('/api/login/failure');
+      response.send(401);
     }
   }
 
