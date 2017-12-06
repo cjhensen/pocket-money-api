@@ -39,7 +39,8 @@ const corsOptions = {
   'https://pocketmoney.netlify.com/',
   'pocketmoney.netlify.com',
   'pocketmoney.netlify.com/',
-  'http://pocketmoney.netlify.com'
+  'http://pocketmoney.netlify.com',
+  'https://fathomless-badlands-99118.herokuapp.com/api/'
   ],
   optionsSuccessStatus: 204,
   credentials: true,
